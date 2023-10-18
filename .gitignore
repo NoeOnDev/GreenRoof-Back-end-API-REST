@@ -1,0 +1,8 @@
+# Ignorar archivo .env
+.env
+
+# Ignorar carpeta node_modules
+node_modules/  
+
+# Ignorar carpeta .idea
+.idea/
