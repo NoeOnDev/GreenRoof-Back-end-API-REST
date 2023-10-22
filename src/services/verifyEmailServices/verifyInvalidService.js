@@ -1,7 +1,6 @@
 const emailConfig = require('../../auth/email/emailConfig');
 
 async function generateInvalidTokenMessage() {
-    // Generar y devolver el mensaje HTML para un token de verificación no válido
     return `
         <!DOCTYPE html>
 <html lang="es">

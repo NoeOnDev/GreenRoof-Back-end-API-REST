@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const isStrongPassword = (password) => {
-    // La contraseña debe tener al menos 8 caracteres, una letra mayúscula y un número
     const strongPasswordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
     return strongPasswordRegex.test(password);
 };
@@ -27,7 +26,6 @@ async function generateHashedPassword(password) {
     } catch (error) {
         console.error('Error generating hashed password:', error);
 
-        // Manejar el error de manera específica según el tipo de error
         if (error instanceof bcrypt.BcryptError) {
             throw new Error('Error en el proceso de hashing de la contraseña');
         } else {

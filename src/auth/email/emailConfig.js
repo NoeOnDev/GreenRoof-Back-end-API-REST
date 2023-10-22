@@ -1,8 +1,6 @@
 const nodemailer = require("nodemailer");
-const axios = require("axios"); // Importa axios para hacer solicitudes HTTP
+const axios = require("axios");
 
-
-// Definir los datos de autenticación
 const authData = {
     type: 'OAuth2',
     user: 'greenroofoficial@gmail.com',
@@ -13,33 +11,24 @@ const authData = {
     expires: 1484314697598,
 };
 
-
-// Función para obtener un nuevo token de acceso si ha expirado
 async function getAccessTokenIfNeeded() {
-    // Verificar si el token de acceso ha expirado (compararlo con la hora actual)
     const currentTime = new Date().getTime();
     if (authData.expires < currentTime) {
         try {
-            // El token de acceso ha expirado, obtener un nuevo token de acceso usando el refreshToken
             const response = await axios.post('https://www.googleapis.com/oauth2/v4/token', {
                 client_id: authData.clientId,
                 client_secret: authData.clientSecret,
                 refresh_token: authData.refreshToken,
                 grant_type: 'refresh_token'
             });
-
-            // Actualizar el campo authData.accessToken con el nuevo token de acceso
             authData.accessToken = response.data.access_token;
-
-            // Calcular la nueva fecha de vencimiento (una hora desde la hora actual)
-            authData.expires = new Date().getTime() + 3500000; // 3600000 milisegundos = 1 hora
+            authData.expires = new Date().getTime() + 3500000;
         } catch (error) {
             console.error('Error al renovar el token de acceso:', error);
         }
     }
 }
 
-// Crear el transporte de nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: authData,
@@ -47,5 +36,5 @@ const transporter = nodemailer.createTransport({
 
 module.exports = {
     transporter,
-    getAccessTokenIfNeeded, // Exportar la función para su uso en otros lugares
+    getAccessTokenIfNeeded,
 };

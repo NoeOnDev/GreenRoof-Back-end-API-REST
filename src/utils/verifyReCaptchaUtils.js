@@ -19,7 +19,7 @@ const verifyRecaptcha = async (recaptchaValue) => {
         return recaptchaData.success;
     } catch (error) {
         console.error('Error verifying reCAPTCHA:', error);
-        return false; // Return false in case of an error
+        return false;
     }
 };
 

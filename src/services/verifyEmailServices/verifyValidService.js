@@ -1,7 +1,6 @@
 const emailConfig = require('../../auth/email/emailConfig');
 
 async function generateVerificationMessage() {
-    // Generar y devolver el mensaje HTML para una verificación exitosa
     return `
 <!DOCTYPE html>
 <html lang="es">

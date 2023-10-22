@@ -38,7 +38,6 @@ async function sendPasswordChangeConfirmationEmail(email) {
         };
 
         await new Promise((resolve, reject) => {
-            // Luego, utiliza el transporte para enviar el correo electrónico
             emailConfig.transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
                     console.error('Error sending email:', err);

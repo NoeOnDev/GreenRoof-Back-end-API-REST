@@ -26,7 +26,7 @@ const verifyToken = (req, res, next) => {
 };
 
 const generateToken = (userId) => {
-    const tokenExpiration = '2h'; // 1 día, puedes ajustar este valor según tus necesidades
+    const tokenExpiration = '2h';
     return jwt.sign({ userId }, jwtSecret, { expiresIn: tokenExpiration });
 };
 
