@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const fetch = require('node-fetch');
 require('dotenv').config();
 
 const emailConfig = require('../../auth/email/emailConfig');

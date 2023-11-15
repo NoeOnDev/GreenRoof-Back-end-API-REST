@@ -14,7 +14,7 @@ async function requestPasswordResetController(req, res) {
     }
 
     if (!user.verified) {
-      return res.status(400).json({ error: 'Correo no verificado' });
+      return res.status(400).json({ error: 'Por favor, verifique su cuenta antes de solicitar su cambio de contraseña' });
     }
 
     const verificationCode = crypto.randomBytes(6).toString('hex');
