@@ -1,4 +1,4 @@
-const socketHandler = require('../../../socketHandler');
+const socketHandler = require('../../services/registerDataSensorsServices/socketHandler');
 const connection = require('../../database/database');
 const moment = require('moment-timezone');
 

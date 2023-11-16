@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const startRabbitMQConsumer = require('./src/services/registerDataSensorsServices/rabbitmqConsumer');
-const socketHandler = require('./socketHandler');
+const socketHandler = require('./src/services/registerDataSensorsServices/socketHandler');
 const app = express();
 const server = http.createServer(app);
 app.use(express.json());
