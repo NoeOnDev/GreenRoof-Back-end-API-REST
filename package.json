@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/NoeAlejandroRodriguezMoto/API-FUNCIONAL#readme",
   "dependencies": {
+    "amqplib": "^0.10.3",
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -27,10 +28,12 @@
     "google-auth-library": "^9.1.0",
     "googleapis": "^126.0.1",
     "jsonwebtoken": "^9.0.2",
+    "moment-timezone": "^0.5.43",
     "mysql": "^2.18.1",
     "nodemailer": "^6.9.5",
     "socket.io": "^4.7.2",
     "validator": "^13.11.0",
+    "winston": "^3.11.0",
     "ws": "^8.14.2"
   },
   "devDependencies": {

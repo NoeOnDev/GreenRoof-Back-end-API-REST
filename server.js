@@ -1,5 +1,9 @@
 const express = require('express');
+const http = require('http');
+const startRabbitMQConsumer = require('./src/services/registerDataSensorsServices/rabbitmqConsumer');
+const socketHandler = require('./socketHandler');
 const app = express();
+const server = http.createServer(app);
 app.use(express.json());
 const fetch = require('node-fetch');
 const cors = require('cors');
@@ -36,7 +40,9 @@ app.post('/cambiar-contrasena', validarPasswords, changePasswordController.chang
 app.post('/sensores', sensorController.saveSensorData);
 app.get('/sensores', getAllSensorDataController.getAllSensorData);
 
+startRabbitMQConsumer();
+socketHandler.initSocket(server);
 
-app.listen(5000, () => {
+server.listen(5000, () => {
     console.log('Server listening on port 5000');
 });

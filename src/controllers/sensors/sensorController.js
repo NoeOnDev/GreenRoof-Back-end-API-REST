@@ -1,4 +1,6 @@
+const socketHandler = require('../../../socketHandler');
 const connection = require('../../database/database');
+const moment = require('moment-timezone');
 
 async function saveSensorData(req, res) {
     try {
@@ -10,7 +12,11 @@ async function saveSensorData(req, res) {
 
         const insertQuery = 'INSERT INTO sensor (temperatura_dht, humedad_dht, temperatura_exterior, estado_suelo) VALUES (?, ?, ?, ?)';
         const insertValues = [temperatura_dht, humedad_dht, temperatura_exterior, estado_suelo];
-        await queryDatabase(insertQuery, insertValues);
+        const result = await queryDatabase(insertQuery, insertValues);
+
+        const fecha_registro = result && result.insertId ? await getFechaRegistro(result.insertId) : null;
+
+        socketHandler.emitSensorData({ temperatura_dht, humedad_dht, temperatura_exterior, estado_suelo, fecha_registro });
 
         res.status(200).json({ message: 'Datos del sensor guardados con éxito.' });
     } catch (error) {
@@ -19,11 +25,24 @@ async function saveSensorData(req, res) {
     }
 }
 
+async function getFechaRegistro(insertId) {
+    const selectQuery = 'SELECT fecha_registro FROM sensor WHERE id = ?';
+    const selectValues = [insertId];
+    const result = await queryDatabase(selectQuery, selectValues);
+
+    const fechaRegistroUTC = result && result.length > 0 ? result[0].fecha_registro : null;
+    const fechaRegistroMexico = fechaRegistroUTC
+        ? moment.utc(fechaRegistroUTC).tz('America/Mexico_City').format('YYYY-MM-DD HH:mm:ss')
+        : null;
+
+    return fechaRegistroMexico;
+}
+
 async function queryDatabase(query, values) {
     return new Promise((resolve, reject) => {
         connection.query(query, values, (err, results) => {
             if (err) {
-                console.error('Error querying the database:', err);
+                console.error('Error query  ing the database:', err);
                 reject(err);
             } else {
                 resolve(results);
