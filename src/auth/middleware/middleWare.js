@@ -3,7 +3,13 @@ require('dotenv').config();
 const jwtSecret = process.env.JWT_SECRET;
 
 const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Token no proporcionado o en formato incorrecto' });
+    }
+
+    const token = authHeader.split(' ')[1];
 
     if (!token) {
         return res.status(401).json({ error: 'Token no proporcionado' });
@@ -24,6 +30,7 @@ const verifyToken = (req, res, next) => {
         next();
     });
 };
+
 
 const generateToken = (userId) => {
     const tokenExpiration = '2h';
