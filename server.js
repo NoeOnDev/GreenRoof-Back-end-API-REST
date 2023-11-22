@@ -19,7 +19,8 @@ const changePasswordController = require('./src/controllers/recoveryPassword/cha
 
 const sensorController = require('./src/controllers/sensors/sensorController');
 const getAllSensorDataController = require('./src/controllers/sensors/getAllSensorDataController');
-const getMediaSensorDataController = require('./src/controllers/sensors/getMediaSensorDataController')
+const getMediaSensorDataController = require('./src/controllers/sensors/getMediaSensorDataController');
+
 
 const middleWare = require('./src/auth/middleware/middleWare');
 
