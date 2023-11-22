@@ -40,8 +40,8 @@ app.post('/cambiar-contrasena', validarPasswords, changePasswordController.chang
 
 // RUTAS PARA SENSORES
 app.post('/sensores', sensorController.saveSensorData);
-app.get('/sensores',getAllSensorDataController.getAllSensorData);
-app.get('/media-sensores', getMediaSensorDataController.getMediaSensorData);
+app.get('/sensores', middleWare.verifyToken,getAllSensorDataController.getAllSensorData);
+app.get('/media-sensores', middleWare.verifyToken ,getMediaSensorDataController.getMediaSensorData);
 
 startRabbitMQConsumer();
 socketHandler.initSocket(server);

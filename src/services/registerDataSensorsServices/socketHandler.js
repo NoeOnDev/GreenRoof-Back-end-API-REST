@@ -1,4 +1,5 @@
 const socketIo = require('socket.io');
+const jwt = require('jsonwebtoken');
 
 let io;
 
