@@ -48,7 +48,7 @@ module.exports = function startRabbitMQConsumer() {
   }
 
   function sendToAnotherAPI(data) {
-    const apiUrl = 'http://52.2.18.83:5000/sensores';
+    const apiUrl = 'http://localhost:5000/sensores';
 
     axios.post(apiUrl, data, { headers: { 'Content-Type': 'application/json' } })
       .then(response => {

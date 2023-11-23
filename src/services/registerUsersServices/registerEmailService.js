@@ -26,7 +26,7 @@ async function sendVerificationEmail(email, verificationToken) {
   </p>
 
   <div style="text-align: center; margin-bottom: 40px;">
-    <a href="http://52.2.18.83:5000/verify?token=${verificationToken}" target="_blank" rel="noopener noreferrer" style="background-color: #1E90FF; color: #fff; padding: 12px 20px; font-size: 16px; border-radius: 4px; text-decoration: none;">
+    <a href="http://localhost:5000/verify?token=${verificationToken}" target="_blank" rel="noopener noreferrer" style="background-color: #1E90FF; color: #fff; padding: 12px 20px; font-size: 16px; border-radius: 4px; text-decoration: none;">
       Verificar mi cuenta
     </a>
   </div>
