@@ -26,6 +26,10 @@ const middleWare = require('./src/auth/middleware/middleWare');
 
 const { validarPasswords } = require('./src/utils/passwordUtils');
 
+app.get("/", (req, res) => {
+    res.send("API Funcionando!");
+});
+
 // RUTAS PARA GESTION DE USUARIOS
 
 app.post('/register', registerUserController.registerUserController);
