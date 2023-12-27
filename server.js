@@ -1,16 +1,9 @@
 const express = require('express');
-const https = require('https');
-const fs = require('fs'); 
+const http = require('http');
 const startRabbitMQConsumer = require('./src/services/registerDataSensorsServices/rabbitmqConsumer');
 const socketHandler = require('./src/services/registerDataSensorsServices/socketHandler');
 const app = express();
-
-const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/greenroof-api.kmonito.com/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/greenroof-api.kmonito.com/fullchain.pem')
-  };
-
-const server = https.createServer(options, app);
+const server = http.createServer(app);
 app.use(express.json());
 const fetch = require('node-fetch');
 const cors = require('cors');
@@ -52,11 +45,11 @@ app.post('/cambiar-contrasena', validarPasswords, changePasswordController.chang
 // RUTAS PARA SENSORES
 app.post('/sensores', sensorController.saveSensorData);
 app.get('/sensores', middleWare.verifyToken,getAllSensorDataController.getAllSensorData);
-app.get('/media-sensores', middleWare.verifyToken ,getMediaSensorDataController.getMediaSensorData);
+app.get('/media-sensores' ,getMediaSensorDataController.getMediaSensorData);
 
 startRabbitMQConsumer();
 socketHandler.initSocket(server);
 
-server.listen(443, () => {
-console.log('Server listening on port 443');
+server.listen(5000, () => {
+console.log('Server listening on port 5000');
 });
