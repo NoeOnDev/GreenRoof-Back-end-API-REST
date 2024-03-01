@@ -54,7 +54,7 @@ async function registerUserController(req, res) {
   }
 }
 
-async function handleVerification(email, password, username) {
+async function handleVerification(email, password) {
   const verificationToken = crypto.randomBytes(32).toString('hex');
   const hashedPassword = await generateHashedPassword(password);
 
