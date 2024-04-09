@@ -23,6 +23,7 @@ const { validarPasswords } = require("./src/utils/passwordUtils");
 
 process.loadEnvFile();
 
+const PORT = process.env.PORT || 3000;
 const app = express();
 const server = http.createServer(app);
 
@@ -67,8 +68,4 @@ app.get("/media-sensores", getMediaSensorDataController.getMediaSensorData);
 //startRabbitMQConsumer();
 socketHandler.initSocket(server);
 
-const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+server.listen(PORT);
