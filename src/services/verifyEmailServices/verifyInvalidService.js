@@ -1,7 +1,7 @@
-const emailConfig = require('../../auth/email/emailConfig');
+const emailConfig = require("../../auth/email/emailConfig");
 
 async function generateInvalidTokenMessage() {
-    return `
+  return `
         <!DOCTYPE html>
 <html lang="es">
 
@@ -97,5 +97,5 @@ async function generateInvalidTokenMessage() {
 }
 
 module.exports = {
-    generateInvalidTokenMessage,
+  generateInvalidTokenMessage,
 };

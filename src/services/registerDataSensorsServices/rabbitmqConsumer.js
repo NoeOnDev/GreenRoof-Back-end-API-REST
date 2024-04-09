@@ -1,6 +1,7 @@
-require('dotenv').config();
-const amqp = require('amqplib/callback_api');
-const axios = require('axios');
+const amqp = require("amqplib/callback_api");
+const axios = require("axios");
+
+process.loadEnvFile();
 
 module.exports = function startRabbitMQConsumer() {
   const rabbitmqHost = process.env.RABBITMQ_HOST;
@@ -11,51 +12,63 @@ module.exports = function startRabbitMQConsumer() {
   const rabbitmqRoutingKey = process.env.RABBITMQ_ROUTING_KEY;
 
   function connectToRabbitMQ() {
-    amqp.connect(`amqp://${rabbitmqUser}:${rabbitmqPassword}@${rabbitmqHost}`, (error0, connection) => {
-      if (error0) {
-        console.error('Error al conectar con RabbitMQ:', error0.message);
-        setTimeout(connectToRabbitMQ, 15000);
-        return;
-      }
-
-      connection.createChannel((error1, channel) => {
-        if (error1) {
-          console.error('Error al crear el canal:', error1.message);
-          setTimeout(connectToRabbitMQ, 15000); 
+    amqp.connect(
+      `amqp://${rabbitmqUser}:${rabbitmqPassword}@${rabbitmqHost}`,
+      (error0, connection) => {
+        if (error0) {
+          console.error("Error al conectar con RabbitMQ:", error0.message);
+          setTimeout(connectToRabbitMQ, 15000);
           return;
         }
-        channel.assertExchange(rabbitmqExchange, 'topic', { durable: true });
-        channel.assertQueue(rabbitmqQueue, { durable: true });
-        channel.bindQueue(rabbitmqQueue, rabbitmqExchange, rabbitmqRoutingKey);
 
-        console.log('Esperando mensajes. Para salir, presiona CTRL+C');
-
-        channel.consume(rabbitmqQueue, (msg) => {
-          if (msg.content) {
-            try {
-              const message = JSON.parse(msg.content.toString());
-              console.log('Mensaje recibido:', message);
-
-              sendToAnotherAPI(message);
-            } catch (error) {
-              console.error('Error al parsear el mensaje JSON:', error);
-              console.log('Contenido del mensaje:', msg.content.toString());
-            }
+        connection.createChannel((error1, channel) => {
+          if (error1) {
+            console.error("Error al crear el canal:", error1.message);
+            setTimeout(connectToRabbitMQ, 15000);
+            return;
           }
-        }, { noAck: true });
-      });
-    });
+          channel.assertExchange(rabbitmqExchange, "topic", { durable: true });
+          channel.assertQueue(rabbitmqQueue, { durable: true });
+          channel.bindQueue(
+            rabbitmqQueue,
+            rabbitmqExchange,
+            rabbitmqRoutingKey
+          );
+
+          console.log("Esperando mensajes. Para salir, presiona CTRL+C");
+
+          channel.consume(
+            rabbitmqQueue,
+            (msg) => {
+              if (msg.content) {
+                try {
+                  const message = JSON.parse(msg.content.toString());
+                  console.log("Mensaje recibido:", message);
+
+                  sendToAnotherAPI(message);
+                } catch (error) {
+                  console.error("Error al parsear el mensaje JSON:", error);
+                  console.log("Contenido del mensaje:", msg.content.toString());
+                }
+              }
+            },
+            { noAck: true }
+          );
+        });
+      }
+    );
   }
 
   function sendToAnotherAPI(data) {
-    const apiUrl = 'http://localhost:5000/sensores';
+    const apiUrl = "http://localhost:5000/sensores";
 
-    axios.post(apiUrl, data, { headers: { 'Content-Type': 'application/json' } })
-      .then(response => {
-        console.log('Respuesta de la API:', response.data);
+    axios
+      .post(apiUrl, data, { headers: { "Content-Type": "application/json" } })
+      .then((response) => {
+        console.log("Respuesta de la API:", response.data);
       })
-      .catch(error => {
-        console.error('Error al enviar los datos a la API:', error.message);
+      .catch((error) => {
+        console.error("Error al enviar los datos a la API:", error.message);
       });
   }
 

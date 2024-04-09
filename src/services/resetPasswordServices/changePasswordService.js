@@ -1,14 +1,14 @@
-const emailConfig = require('../../auth/email/emailConfig');
+const emailConfig = require("../../auth/email/emailConfig");
 
 async function sendPasswordChangeConfirmationEmail(email) {
-    try {
-        await emailConfig.getAccessTokenIfNeeded();
+  try {
+    await emailConfig.getAccessTokenIfNeeded();
 
-        const mailOptions = {
-            from: '"GreenRoof Oficial" <myemail@mail.com>',
-            to: email,
-            subject: 'Confirmación de Cambio de Contraseña en GreenRoof',
-            html: `
+    const mailOptions = {
+      from: '"GreenRoof Oficial" <myemail@mail.com>',
+      to: email,
+      subject: "Confirmación de Cambio de Contraseña en GreenRoof",
+      html: `
   <div style="background-color: #1E90FF; padding: 10px; text-align: center;">
   </div>
 
@@ -35,23 +35,23 @@ async function sendPasswordChangeConfirmationEmail(email) {
   <div style="background-color: #1E90FF; padding: 10px; text-align: center;">
   </div>
             `,
-        };
+    };
 
-        await new Promise((resolve, reject) => {
-            emailConfig.transporter.sendMail(mailOptions, (err, info) => {
-                if (err) {
-                    console.error('Error sending email:', err);
-                    return reject(err);
-                }
-                resolve();
-            });
-        });
-    } catch (error) {
-        console.error('Error sending email:', error);
-        throw error;
-    }
+    await new Promise((resolve, reject) => {
+      emailConfig.transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          console.error("Error sending email:", err);
+          return reject(err);
+        }
+        resolve();
+      });
+    });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error;
+  }
 }
 
 module.exports = {
-    sendPasswordChangeConfirmationEmail,
+  sendPasswordChangeConfirmationEmail,
 };

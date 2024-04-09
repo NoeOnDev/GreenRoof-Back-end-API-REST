@@ -1,14 +1,14 @@
-const emailConfig = require('../../auth/email/emailConfig');
+const emailConfig = require("../../auth/email/emailConfig");
 
 async function sendVerificationEmail(email, verificationToken) {
-    try {
-        await emailConfig.getAccessTokenIfNeeded();
+  try {
+    await emailConfig.getAccessTokenIfNeeded();
 
-        const mailOptions = {
-            from: '"GreenRoof Oficial" <myemail@mail.com>',
-            to: email,
-            subject: 'Verificación de Correo para ser miembro en GreenRoof',
-            html: `
+    const mailOptions = {
+      from: '"GreenRoof Oficial" <myemail@mail.com>',
+      to: email,
+      subject: "Verificación de Correo para ser miembro en GreenRoof",
+      html: `
             
   <div style="background-color: #1E90FF; padding: 10px; text-align: center;">
     
@@ -47,24 +47,24 @@ async function sendVerificationEmail(email, verificationToken) {
     <div style="background-color: #1E90FF; padding: 10px; text-align: center;">
     
   </div>
-            `
-        };
+            `,
+    };
 
-        await new Promise((resolve, reject) => {
-            emailConfig.transporter.sendMail(mailOptions, (err, info) => {
-                if (err) {
-                    console.error('Error sending email:', err);
-                    return reject(err);
-                }
-                resolve();
-            });
-        });
-    } catch (error) {
-        console.error('Error sending email:', error);
-        throw error;
-    }
+    await new Promise((resolve, reject) => {
+      emailConfig.transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          console.error("Error sending email:", err);
+          return reject(err);
+        }
+        resolve();
+      });
+    });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error;
+  }
 }
 
 module.exports = {
-    sendVerificationEmail,
+  sendVerificationEmail,
 };

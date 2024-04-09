@@ -1,7 +1,7 @@
-const emailConfig = require('../../auth/email/emailConfig');
+const emailConfig = require("../../auth/email/emailConfig");
 
 async function generateVerificationMessage() {
-    return `
+  return `
 <!DOCTYPE html>
 <html lang="es">
 
@@ -95,5 +95,5 @@ async function generateVerificationMessage() {
 }
 
 module.exports = {
-    generateVerificationMessage,
+  generateVerificationMessage,
 };
