@@ -1,9 +1,6 @@
 const bcrypt = require("bcrypt");
 const connection = require("../../database/database");
-
-const {
-  sendPasswordChangeConfirmationEmail,
-} = require("../../services/resetPasswordServices/changePasswordService");
+const { sendPasswordChangeConfirmationEmail } = require("../../services/resetPasswordServices/changePasswordService");
 const { isStrongPassword } = require("../../utils/passwordUtils");
 
 async function changePasswordController(req, res) {
