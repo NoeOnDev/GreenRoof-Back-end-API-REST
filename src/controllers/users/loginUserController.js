@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const connection = require("../../database/database");
 const middleWare = require("../../auth/middleware/middleWare");
 const { verifyRecaptcha } = require("../../utils/verifyReCaptchaUtils");
