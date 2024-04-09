@@ -35,8 +35,5 @@
     "validator": "^13.11.0",
     "winston": "^3.11.0",
     "ws": "^8.14.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
   }
 }
