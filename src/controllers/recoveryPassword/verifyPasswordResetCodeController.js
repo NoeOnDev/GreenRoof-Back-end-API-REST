@@ -1,4 +1,3 @@
-const emailConfig = require('../../auth/email/emailConfig');
 const connection = require('../../database/database');
 
 async function verifyPasswordResetCodeController(req, res) {

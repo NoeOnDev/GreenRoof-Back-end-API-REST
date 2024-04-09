@@ -1,8 +1,7 @@
-const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const validator = require('validator');
-const fetch = require('node-fetch');
-require('dotenv').config();
+
+process.loadEnvFile();
 
 const { isStrongPassword, generateHashedPassword } = require('../../utils/passwordUtils');
 const registerEmailService = require('../../services/registerUsersServices/registerEmailService');

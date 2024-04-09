@@ -1,10 +1,8 @@
-const bcrypt = require('bcrypt');
-require('dotenv').config();
-
-const emailConfig = require('../../auth/email/emailConfig');
 const connection = require('../../database/database');
 const middleWare = require('../../auth/middleware/middleWare');
 const { verifyRecaptcha } = require('../../utils/verifyReCaptchaUtils');
+
+process.loadEnvFile();
 
 async function loginUserController(req, res) {
   try {

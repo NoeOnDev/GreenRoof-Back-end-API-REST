@@ -1,6 +1,4 @@
 const connection = require('../../database/database');
-const emailConfig = require('../../auth/email/emailConfig');
-
 const verifyValidService = require('../../services/verifyEmailServices/verifyValidService');
 const verifyInvalidService = require('../../services/verifyEmailServices/verifyInvalidService');
 

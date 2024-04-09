@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const emailConfig = require("../../auth/email/emailConfig");
 const connection = require("../../database/database");
 
 const {

@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-const emailConfig = require('../../auth/email/emailConfig');
 const connection = require('../../database/database');
 const { sendVerificationCodeEmail } = require('../../services/resetPasswordServices/requestPasswordService');
 
