@@ -1,8 +1,6 @@
 const crypto = require("crypto");
 const validator = require("validator");
 
-process.loadEnvFile();
-
 const {
   isStrongPassword,
   generateHashedPassword,
