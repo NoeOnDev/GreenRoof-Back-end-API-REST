@@ -21,6 +21,8 @@ const middleWare = require("./src/auth/middleware/middleWare");
 
 const { validarPasswords } = require("./src/utils/passwordUtils");
 
+process.loadEnvFile();
+
 const app = express();
 const server = http.createServer(app);
 
@@ -65,7 +67,7 @@ app.get("/media-sensores", getMediaSensorDataController.getMediaSensorData);
 //startRabbitMQConsumer();
 socketHandler.initSocket(server);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
