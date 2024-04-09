@@ -1,12 +1,13 @@
 const express = require('express');
 const http = require('http');
+const cors = require('cors');
 //const startRabbitMQConsumer = require('./src/services/registerDataSensorsServices/rabbitmqConsumer');
-const socketHandler = require('./src/services/registerDataSensorsServices/socketHandler');
+
 const app = express();
 const server = http.createServer(app);
+const socketHandler = require('./src/services/registerDataSensorsServices/socketHandler');
+
 app.use(express.json());
-const fetch = require('node-fetch');
-const cors = require('cors');
 app.use(cors());
 
 const registerUserController = require('./src/controllers/users/registerUserController');
