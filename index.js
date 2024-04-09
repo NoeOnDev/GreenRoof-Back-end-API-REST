@@ -35,13 +35,11 @@ app.get("/", (req, res) => {
 });
 
 // RUTAS PARA GESTION DE USUARIOS
-
 app.post("/register", registerUserController.registerUserController);
 app.get("/verify", verifyUserController.verifyUserController);
 app.post("/login", loginUserController.loginUserController);
 
 // RUTAS PARA RESTAURAR CONTRASEÑA
-
 app.post(
   "/solicitar-cambio-contrasena",
   requestPasswordResetController.requestPasswordResetController
